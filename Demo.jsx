@@ -1,5 +1,5 @@
 import {  useRef, useState } from "react";
-import { Paperclip, Mic, Send } from "lucide-react";
+import { Paperclip, Mic, Send } from "lucide-react" ;
 
 const ChatApp = () => {
   const [messages, setMessages] = useState([]);
