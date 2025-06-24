@@ -44,6 +44,7 @@ const ChatApp = () => {
         },
       ]);
 
+      
       console.log("🚀 Sending WAV file to API...");
       const response = await fetch("http://98.70.11.123:3045/transcribe", {
         method: "POST",
