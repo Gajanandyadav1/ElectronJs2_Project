@@ -14,7 +14,7 @@ const ChatApp = () => {
     if (!file) return;
 
     if (!file.type.startsWith("audio/")) {
-      alert("Only audio files are allowed!");
+      alert("Only audio files are allowed!") ;
       return;
     }
 
