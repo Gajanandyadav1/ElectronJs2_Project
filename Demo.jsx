@@ -3,9 +3,9 @@ import { Paperclip, Mic, Send } from "lucide-react" ;
 
 const ChatApp = () => {
   const [messages, setMessages] = useState([]) ;
-  const [input, setInput] = useState("");
-    const [recording, setRecording] = useState(false);
-    const audioChunksRef = useRef([]); 
+  const [input, setInput] = useState("") ;
+    const [recording, setRecording] = useState(false) ;
+    const audioChunksRef = useRef([]) ; 
     const apiIntervalRef = useRef(null);  
   const chatRef = useRef(null);
  
