@@ -31,7 +31,7 @@ const ChatApp = () => {
       console.log("✅ WAV File Ready:", wavFile);
 
       const formData = new FormData();
-      formData.append("file", wavFile);
+      formData.append("file", wavFile) ;
 
       // Show uploaded file in UI
       setMessages((prev) => [
