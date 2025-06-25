@@ -21,7 +21,8 @@ const ChatApp = () => {
     try {
       console.log("🔄 Converting to WAV...");
 
-      // Show Loading Message Before API Response
+      // Show Loading Message Before API Response 
+      
       setMessages((prev) => [
         ...prev,
         { text: "Loading Response...", sender: "bot", isLoading: true },
