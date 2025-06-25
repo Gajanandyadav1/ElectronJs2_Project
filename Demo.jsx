@@ -10,7 +10,7 @@ const ChatApp = () => {
   const chatRef = useRef(null);
  
   const handleFileChange = async (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0] ;
     if (!file) return;
 
     if (!file.type.startsWith("audio/")) {
