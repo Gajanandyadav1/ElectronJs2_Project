@@ -3,151 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>googlemeet</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Google Meet Audio Recorder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-     <link rel="stylesheet" href="style.css">
-    <style>  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSS7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body { background-color: #f8f9fa; }
+        .tab-content { padding: 20px; }
+        .btn { margin-right: 10px; }
+        #transcriptionResult { background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        #audioPlayer { margin-top: 15px; }
+        .speaker-label { font-weight: bold; color: #2c3e50; }
+        .error-message { color: red; font-weight: bold; margin-top: 10px; }
     </style>
+    <style>
+  .navbar-premium {
+    background: linear-gradient(90deg, #fdfbfb, #ebedee);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.4s ease-in-out;
+  }
+
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 22px;
+    color: #0d6efd;
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-brand:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-link {
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0; top:45px;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    background: #0d6efd;
+    transition: 0.4s;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    color: #0d6efd;
+    transform: scale(1.05);
+  }
+
+  .nav-icon {
+    width: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+    transition: transform 0.3s;
+  }
+
+  .nav-link:hover .nav-icon {
+    transform: rotate(10deg) scale(1.1);
+  }
+
+  .custom-toggler {
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: #000;
+    transition: transform 0.3s;
+  }
+
+  .custom-toggler:focus {
+    outline: none;
+    /* transform: rotate(90deg); */
+  }
+</style>
 </head>
 <body>
+    
+ 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"> </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">  <img src="images-removebg-preview.png" class="me-2"  style="width: 22px;  "> Text to Text</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="FirstDemo.html"><i class="fa-solid fa-microphone mx-2"></i> Audio to Text</a>
-              </li>
-           
-              <li class="nav-item">
-                <a class="nav-link" href="Second.html"> <img src="download.png" class="me-2"  style="width: 25px;  ">Google Meet</a>
-              </li>
-           
-              
-            </ul>
-            
+
+ 
+
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-premium">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="download__3_-removebg-preview (1).png" style="width: 50px;"></a>
+
+    <button class="custom-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" onclick="toggleMenuIcon(this)">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">
+            <img src="images-removebg-preview.png" class="nav-icon"> Text to Text
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="FirstDemo.html">
+            <i class="fas fa-microphone nav-icon"></i> Audio to Text
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Second.html">
+            <img src="download__1_-removebg-preview (1).png" class="nav-icon"> Google Meet
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 m-auto">
+          <div id="tab3" class="tab-content container">
+            <h6 class="my-4"> Audio Recorder</h6>
+            <button id="startButton" class="btn" style="background-color: rgb(0, 77, 37); color: #fff; border-radius: 10px; font-size: 14px; border: none;">Start Recording</button>
+            <button id="stopButton" class="btn" style="background-color: rgb(147, 0, 0); color: #fff; border-radius: 10px; font-size: 14px; border: none;" disabled>Stop Recording</button>
+            <br><br>
+            <audio id="audioPlayer" controls></audio>
+            <br>
+            <div id="transcriptionResult" style="margin-top: 15px; font-weight: bold; color: #333;"></div>
           </div>
         </div>
-      </nav>
-
-
-
-
-      <div class="container">
-        <div class="row">
-            <div class="col-lg-10 m-auto">
-                <!-- <div id="tab3" class="tab-content"> 
-                    <h6 class="my-4"> Audio Recorder</h6>
-                    <button id="startButton"  class="btn" style="background-color: rgb(0, 77, 37); color: #fff; border-radius: 10px; font-size: 14px; border: none; ">Start Recording</button>
-                    <button id="stopButton"  class="btn"  style="background-color: rgb(147, 0, 0); color: #fff; border-radius: 10px; font-size: 14px; border: none;">Stop Recording</button>
-                    <br><br>
-                    <video width="0" height="0" autoplay muted></video>
-                    <br>
-                    <audio id="audioPlayer" controls></audio>
-                  </div> -->
-            </div>
-        </div>
       </div>
-
-
-
-
-
-
-      <div class="container mt-4">
-        <div class="row">
-            <div class="col-lg-10 m-auto">
-
-                <div class="card">
-                    <div class="card-body"  id="openCollapseLink" role="button">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text bg-white"><img src="download.png"  style="width: 20px;"></span>
-                            <!-- <input type="text" class="form-control" placeholder="Enter Your Google meet Link" aria-label="Amount (to the nearest dollar)"  style="box-shadow: none;"> -->
-                            <span class="input-group-text bg-white">  
-                                    <button id="startButton"  class="btn me-3" style="background-color: rgb(0, 77, 37); color: #fff; border-radius: 10px; font-size: 14px; border: none; "   > <img src="images__1_-removebg-preview.png" class="me-1"style="width: 13px;"> Recording</button>
-                                    <button id="stopButton"  class="btn"  style="background-color: rgb(147, 0, 0); color: #fff; border-radius: 10px; font-size: 14px; border: none;"> <img src="images__1_-removebg-preview.png" class="me-1" style="width: 13px;">Stop Recording</button> 
-                                
-                                </span>
-                          </div>
-
-
-
-
-                          <div class="collapse" id="collapseExample">
-                            <div class="card card-body border-0">
-                            <div class="row">
-                                <div class="col-lg-10">
-                                    <p> <i class="fa-solid fa-users me-2"></i>Participants: 3 </p>
-                                </div>
-
-
-                                <div class="card py-0 mb-0 border-0 " style="background-color: rgb(202, 202, 202);">
-                                    <div class="card-body pb-0 ">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                     <p>10:30 AM </p>
-                                            </div>
-                                            <div class="col-10">
-                                                    <h6>Speaker 1  </h6>
-                                                    <p>Hello everyone, shall we begin the meeting?
-
-                                                    </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-        
-                              <br><br>
-                              <video width="0" height="0" autoplay muted></video>
-                              <br>
-                              <audio id="audioPlayer" controls></audio>
-                            </div>
-                          </div>
-
-
-                    </div>
-                </div>
-                
-                 
-            </div>
-        </div>
-      </div>
- 
-
+    </div>
 <script>
-    document.getElementById("openCollapseLink").addEventListener("click", function () {
-      const collapseEl = document.getElementById("collapseExample");
-      const bsCollapse = new bootstrap.Collapse(collapseEl, {
-        toggle: false,
-      });
-      bsCollapse.show();  
-    });
-  
-    document.getElementById("openCollapseBtn").addEventListener("click", function () {
-      const collapseEl = document.getElementById("collapseExample");
-      const bsCollapse = new bootstrap.Collapse(collapseEl, {
-        toggle: false,
-      });
-      bsCollapse.show();  
-    });
-  </script>
-     
+  function toggleMenuIcon(btn) {
+    btn.classList.toggle('open');
+    const icon = btn.querySelector('i');
+    if (btn.classList.contains('open')) {
+      icon.className = 'fas fa-times';  
+    } else {
+      icon.className = 'fas fa-bars';  
+    }
+  }
+</script>
+    <script>
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const resultDiv = document.getElementById('transcriptionResult');
 
-      <script src="renderer.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        let mediaRecorder;
+        let audioContext, micStream, systemStream, destination;
+        let startTime;
+
+        startButton.addEventListener('click', async () => {
+            try {
+                micStream = await navigator.mediaDevices.getUserMedia({
+                    audio: {
+                        sampleRate: 16000,
+                        channelCount: 2,
+                        echoCancellation: false,
+                        noiseSuppression: false,
+                        autoGainControl: false
+                    }
+                });
+                console.log('Mic stream acquired');
+
+                systemStream = await navigator.mediaDevices.getDisplayMedia({
+                    audio: {
+                        sampleRate: 16000,
+                        channelCount: 2,
+                        echoCancellation: false,
+                        noiseSuppression: false,
+                        autoGainControl: false
+                    },
+                    video: true
+                });
+                console.log('System stream acquired');
+
+                audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+                console.log('AudioContext sampleRate:', audioContext.sampleRate);
+                destination = audioContext.createMediaStreamDestination();
+
+                const micSource = audioContext.createMediaStreamSource(micStream);
+                const micGain = audioContext.createGain();
+                micSource.connect(micGain);
+                micGain.gain.value = 2.0;
+                micGain.connect(destination);
+
+                const systemSource = audioContext.createMediaStreamSource(systemStream);
+                const systemGain = audioContext.createGain();
+                systemSource.connect(systemGain);
+                systemGain.gain.value = 1.8;
+                systemGain.connect(destination);
+
+                mediaRecorder = new MediaRecorder(destination.stream, {
+                    mimeType: 'audio/webm',
+                    audioBitsPerSecond: 128000
+                });
+                const audioChunks = [];
+                startTime = Date.now();
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = async () => {
+                    const duration = (Date.now() - startTime) / 1000;
+                    console.log('Recording duration:', duration, 'seconds');
+                    if (duration < 15) {
+                        resultDiv.innerHTML = '<span class="error-message">Error: Recording too short (minimum 15 seconds).</span>';
+                        cleanup();
+                        return;
+                    }
+
+                    const webmBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    console.log('WebM Blob size:', webmBlob.size);
+                    if (webmBlob.size < 1000) {
+                        resultDiv.innerHTML = '<span class="error-message">Error: Recording file is too small or empty.</span>';
+                        cleanup();
+                        return;
+                    }
+
+                    try {
+                        const wavBlob = await convertWebMToWAV(webmBlob);
+                        console.log('WAV Blob size:', wavBlob.size);
+                        if (wavBlob.size < 1000) {
+                            resultDiv.innerHTML = '<span class="error-message">Error: Generated WAV file is too small.</span>';
+                            cleanup();
+                            return;
+                        }
+
+                        const wavUrl = URL.createObjectURL(wavBlob);
+                        audioPlayer.src = wavUrl;
+                        audioPlayer.play();
+
+                        resultDiv.innerHTML = '<div>Processing audio, please wait...</div>';
+                        const file = new File([wavBlob], 'recorded.wav', { type: 'audio/wav' });
+                        const formData = new FormData();
+                        formData.append("file", file);
+
+                        let response;
+                        let retries = 3;
+                        while (retries > 0) {
+                            try {
+                                console.log('Sending API request, attempt:', 4 - retries);
+                                response = await fetch("http://127.0.0.1:3045/transcribe", {
+                                    method: "POST",
+                                    body: formData,
+                                    signal: AbortSignal.timeout(180000)
+                                });
+                                break;
+                            } catch (error) {
+                                console.error('API retry attempt:', 4 - retries, 'Error:', error);
+                                retries--;
+                                if (retries === 0) throw error;
+                                await new Promise(resolve => setTimeout(resolve, 1000));
+                            }
+                        }
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        console.log('API response:', result);
+                        resultDiv.innerHTML = '';
+
+                        // Check if response contains expected fields
+                        if (result.diarization && result.transcription && result.summary) {
+                            let transcriptionHTML = `
+                                <div style="margin-top: 20px;">
+                                    <strong>Summary:</strong><br>${result.summary}<br><br>
+                                    <strong>Full Transcription:</strong><br>${result.transcription.replace(/\n/g, '<br>')}<br><br>
+                                    <strong>Diarized Transcription:</strong><br>
+                            `;
+                            // Process diarization array
+                            result.diarization.forEach(entry => {
+                                transcriptionHTML += `<div style="margin-top: 10px;"><span class="speaker-label">${entry.speaker} (${entry.timestamp}):</span> ${entry.text}<br></div>`;
+                            });
+                            transcriptionHTML += `</div>`;
+                            resultDiv.innerHTML = transcriptionHTML;
+                        } else {
+                            resultDiv.innerHTML = `<span class="error-message">Transcription failed: Invalid response format from API.</span>`;
+                        }
+
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = wavUrl;
+                        downloadLink.download = 'recorded.wav';
+                        downloadLink.textContent = 'Download WAV';
+                        downloadLink.style.display = 'inline-block';
+                        downloadLink.style.marginTop = '10px';
+                        document.getElementById('tab3').appendChild(downloadLink);
+                    } catch (error) {
+                        console.error("Error processing audio:", error);
+                        resultDiv.innerHTML = `<span class="error-message">Error: ${error.message || 'Failed to process audio. Ensure API is running at http://127.0.0.1:3045.'}</span>`;
+                    }
+
+                    cleanup();
+                };
+
+                mediaRecorder.start();
+                console.log('Recording started');
+                startButton.disabled = true;
+                stopButton.disabled = false;
+            } catch (error) {
+                console.error("Error starting recording:", error);
+                resultDiv.innerHTML = '<span class="error-message">Error starting recording. Ensure mic and screen sharing permissions are granted.</span>';
+                startButton.disabled = false;
+                cleanup();
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            mediaRecorder.stop();
+            console.log('Recording stopped');
+        });
+
+        function cleanup() {
+            if (micStream) micStream.getTracks().forEach(track => track.stop());
+            if (systemStream) systemStream.getTracks().forEach(track => track.stop());
+            if (audioContext) audioContext.close().catch(() => {});
+            if (audioPlayer.src) URL.revokeObjectURL(audioPlayer.src);
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            console.log('Cleanup completed');
+        }
+
+        async function convertWebMToWAV(webmBlob) {
+            if (webmBlob.size < 1000) {
+                throw new Error('WebM blob is too small');
+            }
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 16000 });
+            const arrayBuffer = await webmBlob.arrayBuffer();
+            let audioBuffer;
+            try {
+                audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+            } catch (error) {
+                console.error('Failed to decode WebM:', error);
+                throw new Error('Invalid or corrupted WebM audio');
+            }
+            if (audioBuffer.length == 0) {
+                throw new Error('Audio buffer is empty');
+            }
+            console.log('AudioBuffer: length=', audioBuffer.length, 'channels=', audioBuffer.numberOfChannels, 'sampleRate=', audioBuffer.sampleRate);
+
+            if (audioBuffer.sampleRate !== 16000) {
+                console.log('Resampling from', audioBuffer.sampleRate, 'to 16000 Hz');
+                audioBuffer = await resampleAudioBuffer(audioBuffer, 16000);
+            }
+
+            if (audioBuffer.numberOfChannels === 1) {
+                console.log('Converting mono to stereo');
+                audioBuffer = monoToStereo(audioBuffer);
+            }
+
+            const wavBuffer = audioBufferToWAV(audioBuffer);
+            audioContext.close();
+            return new Blob([wavBuffer], { type: 'audio/wav' });
+        }
+
+        async function resampleAudioBuffer(audioBuffer, targetSampleRate) {
+            const offlineContext = new OfflineAudioContext(
+                audioBuffer.numberOfChannels,
+                Math.ceil(audioBuffer.length * targetSampleRate / audioBuffer.sampleRate),
+                targetSampleRate
+            );
+            const source = offlineContext.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(offlineContext.destination);
+            source.start();
+            return await offlineContext.startRendering();
+        }
+
+        function monoToStereo(audioBuffer) {
+            const monoData = audioBuffer.getChannelData(0);
+            const length = audioBuffer.length;
+            const sampleRate = audioBuffer.sampleRate;
+            const stereoBuffer = new AudioBuffer({
+                numberOfChannels: 2,
+                length: length,
+                sampleRate: sampleRate
+            });
+            stereoBuffer.getChannelData(0).set(monoData);
+            stereoBuffer.getChannelData(1).set(monoData);
+            return stereoBuffer;
+        }
+
+        function audioBufferToWAV(audioBuffer) {
+            const numChannels = audioBuffer.numberOfChannels;
+            const sampleRate = 16000;
+            const length = audioBuffer.length * numChannels * 2 + 44;
+            const buffer = new ArrayBuffer(length);
+            const view = new DataView(buffer);
+
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + audioBuffer.length * numChannels * 2, true);
+            writeString(view, 8, 'WAVE');
+
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * numChannels * 2, true);
+            view.setUint16(32, numChannels * 2, true);
+            view.setUint16(34, 16, true);
+
+            writeString(view, 36, 'data');
+            view.setUint32(40, audioBuffer.length * numChannels * 2, true);
+
+            let offset = 44;
+            for (let i = 0; i < audioBuffer.length; i++) {
+                for (let channel = 0; channel < numChannels; channel++) {
+                    let s = Math.max(-1, Math.min(1, audioBuffer.getChannelData(channel)[i]));
+                    s = s < 0 ? s * 0x8000 : s * 0x7FFF;
+                    view.setInt16(offset, s, true);
+                    offset += 2;
+                }
+            }
+
+            return buffer;
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
- 
-  
