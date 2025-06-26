@@ -1,28 +1,27 @@
 import {  useRef, useState } from "react";
-import { Paperclip, Mic, Send } from "lucide-react" ;
+import { Paperclip, Mic, Send } from "lucide-react";
 
 const ChatApp = () => {
-  const [messages, setMessages] = useState([]) ;
-  const [input, setInput] = useState("") ;
-    const [recording, setRecording] = useState(false) ;
-    const audioChunksRef = useRef([]) ; 
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+    const [recording, setRecording] = useState(false);
+    const audioChunksRef = useRef([]); 
     const apiIntervalRef = useRef(null);  
   const chatRef = useRef(null);
  
   const handleFileChange = async (event) => {
-    const file = event.target.files[0] ;
+    const file = event.target.files[0];
     if (!file) return;
 
     if (!file.type.startsWith("audio/")) {
-      alert("Only audio files are allowed!") ;
+      alert("Only audio files are allowed!");
       return;
     }
 
     try {
       console.log("🔄 Converting to WAV...");
 
-      // Show Loading Message Before API Response 
-      
+      // Show Loading Message Before API Response
       setMessages((prev) => [
         ...prev,
         { text: "Loading Response...", sender: "bot", isLoading: true },
@@ -32,7 +31,7 @@ const ChatApp = () => {
       console.log("✅ WAV File Ready:", wavFile);
 
       const formData = new FormData();
-      formData.append("file", wavFile) ;
+      formData.append("file", wavFile);
 
       // Show uploaded file in UI
       setMessages((prev) => [
@@ -45,7 +44,6 @@ const ChatApp = () => {
         },
       ]);
 
-      
       console.log("🚀 Sending WAV file to API...");
       const response = await fetch("http://98.70.11.123:3045/transcribe", {
         method: "POST",
@@ -282,6 +280,3 @@ const ChatApp = () => {
 };
 
 export default ChatApp;
-
-
-// ssssssssssssssssssssssssssssssssssssssssssss

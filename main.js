@@ -28,7 +28,7 @@ app.whenReady().then(() => {
   })
 
   // Open DevTools when app starts
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Set media access
   session.defaultSession.setDisplayMediaRequestHandler((request, callback) => {

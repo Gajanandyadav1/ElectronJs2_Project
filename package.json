@@ -1,19 +1,36 @@
 {
   "name": "electronjs",
   "version": "1.0.0",
+  "description": "My Electron App",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "watch": "nodemon --exec electron ."
+    "watch": "nodemon --exec electron .",
+    "build": "electron-builder"
   },
-  "author": "",
+  "author": "Your Name",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "electron": "^35.1.4",
     "electron-window-state": "^5.0.3",
     "ffmpeg-static": "^5.2.0",
     "node-record-lpcm16": "^1.0.1",
     "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "electron": "^35.1.4",
+    "electron-builder": "^24.6.0"
+  },
+  "build": {
+    "appId": "com.example.myapp",
+    "productName": "MyElectronApp",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    }
   }
 }

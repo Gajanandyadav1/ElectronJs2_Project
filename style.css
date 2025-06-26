@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif ;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
@@ -80,5 +80,9 @@ body {
   }
 
 
-
+@media (max-width:768px) {
+  .navbar-premium {
+    line-height: 40px !important;
+  }
+}
  
