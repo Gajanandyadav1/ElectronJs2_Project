@@ -1,10 +1,9 @@
-
-
+ 
 
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <title>Chat App</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -618,35 +617,132 @@
   }
 
 
+ 
+  .navbar-premium {
+    background: linear-gradient(90deg, #fdfbfb, #ebedee);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.4s ease-in-out;
+  }
 
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 22px;
+    color: #0d6efd;
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-brand:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-link {
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top:45px;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    background: #0d6efd;
+    transition: 0.4s;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    color: #0d6efd;
+    transform: scale(1.05);
+  }
+
+  .nav-icon {
+    width: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+    transition: transform 0.3s;
+  }
+
+  .nav-link:hover .nav-icon {
+    transform: rotate(10deg) scale(1.1);
+  }
+
+  .custom-toggler {
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: #000;
+    transition: transform 0.3s;
+  }
+
+  .custom-toggler:focus {
+    outline: none;
+    /* transform: rotate(90deg); */
+  }
 </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"> </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">  <img src="images-removebg-preview.png" class="me-2"  style="width: 22px;  "> Text to Text</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="FirstDemo.html"><i class="fa-solid fa-microphone mx-2"></i> Audio to Text</a>
-            </li>
-         
-            <li class="nav-item">
-              <a class="nav-link" href="Second.html"> <img src="download.png" class="me-2"  style="width: 25px;  ">Google Meet</a>
-            </li>
-         
-            
-          </ul>
-          
-        </div>
-      </div>
-    </nav>
+ <script>
+  function toggleMenu() {
+    const menu = document.getElementById('navbarSupportedContent');
+    const icon = document.getElementById('menu-icon');
+    const isOpen = menu.classList.contains('show');
+
+    if (isOpen) {
+      menu.classList.remove('show');
+      icon.className = 'fas fa-bars';
+    } else {
+      menu.classList.add('show');
+      icon.className = 'fas fa-times';
+    }
+  }
+</script>
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-premium">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="download__3_-removebg-preview (1).png" style="width: 50px;">
+    </a>
+
+    <!-- Custom Toggler -->
+    <button class="custom-toggler d-lg-none" type="button" onclick="toggleMenu()">
+      <i id="menu-icon" class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapse Menu -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">
+            <img src="images-removebg-preview.png" class="nav-icon"> Text to Text
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="FirstDemo.html">
+            <i class="fas fa-microphone nav-icon"></i> Audio to Text
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Second.html">
+            <img src="download__1_-removebg-preview (1).png" class="nav-icon"> Google Meet
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-10 m-auto">
