@@ -919,11 +919,12 @@
          reader.onload = async () => {
            try {
              const arrayBuffer = reader.result;
-             const audioBuffer = await context.decodeAudioData(arrayBuffer);
+             const audioBuffer = await context.decodeAudioData(arrayBuffer) ;
              const wav = encodeWav(audioBuffer);
              const blob = new Blob([wav], { type: "audio/wav" });
              resolve(new File([blob], "converted.wav", { type: "audio/wav" }));
            } catch (e) {
+            
              reject(e);
            }
          };
