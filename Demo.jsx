@@ -6,8 +6,8 @@ const ChatApp = () => {
   const [input, setInput] = useState("");
     const [recording, setRecording] = useState(false);
     const audioChunksRef = useRef([]); 
-    const apiIntervalRef = useRef(null);  
-  const chatRef = useRef(null);
+    const apiIntervalRef = useRef(null) ;  
+  const chatRef = useRef(null); 
  
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
