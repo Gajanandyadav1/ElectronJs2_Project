@@ -78,7 +78,7 @@ const ChatApp = () => {
   };
 
   // ✅ Convert any audio file to WAV before uploading
-  const convertToWav = async (file) => {
+  const convertToWav = async (file) =>  {
     return new Promise((resolve, reject) => {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const reader = new FileReader();
