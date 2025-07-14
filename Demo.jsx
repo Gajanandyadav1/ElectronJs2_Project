@@ -9,7 +9,7 @@ const ChatApp = () => {
     const apiIntervalRef = useRef(null) ;  
   const chatRef = useRef(null); 
  
-  const handleFileChange = async (event) => {
+  const handleFileChange = async (event) =>  {
     const file = event.target.files[0];
     if (!file) return;
 
